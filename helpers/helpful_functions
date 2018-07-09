@@ -1,0 +1,36 @@
+stats = regionprops(BW,properties)
+
+[sub_onion,rect_onion] = imcrop(onion);
+
+c = normxcorr2(sub_onion(:,:,1),sub_peppers(:,:,1));
+
+bwconncomp
+
+% remove all object containing fewer than 30 pixels
+bw = bwareaopen(bw,30);
+
+% fill any holes, so that regionprops can be used to estimate
+% the area enclosed by each of the boundaries
+bw = imfill(bw,'holes');
+
+delta_sq = diff(boundary).^2;    
+perimeter = sum(sqrt(sum(delta_sq,2)));
+
+% compute the roundness metric
+metric = 4*pi*area/perimeter^2;
+
+figure, imshowpair(original,recovered,'montage')
+
+%odstraneni sumu low-pass filterem
+zobr(abs(ifft2(fft2(B).*fftshift(kruh(50,size(B,1))))));
+
+% Scvrkne souvisle oblasti do jedineho bodu ve stredu
+ i= bwmorph(i, 'shrink', Inf)
+
+% Napady: odecist bar. kanaly a prahovat pro masku
+% Spocitat var pomoci konvoluce (texture_demo.m)
+
+% Sobel ~ 400
+
+% Vypocet druhe derivace pomoci konvoluce
+ddx = conv(x,[.25 0 -.5 0 .25],'same'))
